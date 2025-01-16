@@ -3,7 +3,11 @@ def main():
     file_contents = get_book_text(path)
     num_words = get_num_words(file_contents)
     chars_dict = get_chars_dict(file_contents)
+
+    sorted_chars_dict = sorted(chars_dict.items(), key=lambda x: x[1], reverse=False)
     print(chars_dict)
+    print("---------")
+    print(sorted_chars_dict)
     print(f"Number of words: {num_words}")
 
 def get_num_words(text):
