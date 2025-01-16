@@ -1,10 +1,28 @@
-with open("books/frankenstein.txt") as f:
-    count=0
-    file_contents = f.read()
-    words=file_contents.split()
-    chars=str(words).lower()
-    letters={}
+def main():
+    path = "books/frankenstein.txt"
+    file_contents = get_book_text(path)
+    num_words = get_num_words(file_contents)
+    chars_dict = get_chars_dict(file_contents)
+    print(chars_dict)
+    print(f"Number of words: {num_words}")
 
-    for char in chars:
-        letters[char]+= 1
-print(letters)
+def get_num_words(text):
+    words = text.split()
+    return len(words)
+
+def get_book_text(path):
+    with open(path) as f:
+        return f.read()
+
+
+def get_chars_dict(file_contents):
+    letters = {}
+    for char in file_contents:
+        char = char.lower()
+        if char in letters:
+            letters[char] += 1
+        else:
+            letters[char] = 1
+    return letters
+
+main()
