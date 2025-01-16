@@ -5,9 +5,7 @@ def main():
     chars_dict = get_chars_dict(file_contents)
 
     sorted_chars_dict = sorted(chars_dict.items(), key=lambda x: x[1], reverse=False)
-    print(chars_dict)
-    print("---------")
-    print(sorted_chars_dict)
+    print_report(sorted_chars_dict)
     print(f"Number of words: {num_words}")
 
 def get_num_words(text):
@@ -28,5 +26,17 @@ def get_chars_dict(file_contents):
         else:
             letters[char] = 1
     return letters
+
+def print_report(chars_dict):
+    print("--- Character Counts Report ---")
+    for char, count in chars_dict:
+        # For special characters, we might want to make them more visible
+        if char.isspace():
+            char_name = "SPACE"
+        elif char == '\n':
+            char_name = "NEWLINE"
+        else:
+            char_name = char
+        print(f"The '{char_name}' character appears {count} times")
 
 main()
