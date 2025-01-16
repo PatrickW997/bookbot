@@ -4,9 +4,10 @@ def main():
     num_words = get_num_words(file_contents)
     chars_dict = get_chars_dict(file_contents)
 
-    sorted_chars_dict = sorted(chars_dict.items(), key=lambda x: x[1], reverse=False)
-    print_report(sorted_chars_dict)
-    print(f"Number of words: {num_words}")
+    chars_list = [{'name': char, 'num': count} for char, count in chars_dict.items()]
+    chars_list.sort(reverse=True, key=sort_on)
+
+    print_report(chars_list,num_words)
 
 def get_num_words(text):
     words = text.split()
@@ -27,16 +28,16 @@ def get_chars_dict(file_contents):
             letters[char] = 1
     return letters
 
-def print_report(chars_dict):
-    print("--- Character Counts Report ---")
-    for char, count in chars_dict:
+def print_report(chars_list, num_words):
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{num_words} words found in the document \n")
+    for char_dict in chars_list:
         # For special characters, we might want to make them more visible
-        if char.isspace():
-            char_name = "SPACE"
-        elif char == '\n':
-            char_name = "NEWLINE"
-        else:
-            char_name = char
-        print(f"The '{char_name}' character appears {count} times")
+        if char_dict["name"].isalpha():
+            char_name = char_dict["name"]
+            print(f"The '{char_name}' character was found {char_dict["num"]} times")
+    print("--- End report ---")
 
+def sort_on(char_dict):
+    return char_dict["num"]
 main()
