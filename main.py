@@ -7,7 +7,7 @@ def main():
     chars_list = [{'name': char, 'num': count} for char, count in chars_dict.items()]
     chars_list.sort(reverse=True, key=sort_on)
 
-    print_report(chars_list,num_words)
+    print_report(chars_list, num_words)
 
 def get_num_words(text):
     words = text.split()
